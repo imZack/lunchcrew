@@ -1,0 +1,12 @@
+version: '3'
+services:
+  bot:
+    image: zack/lunchcrew
+    build: .
+    volumes:
+    ports:
+    - 3000
+    environment:
+    - CHANNEL_ACCESS_TOKEN=
+    - CHANNEL_SECRET=
+    - DEBUG=lunchcrew*
