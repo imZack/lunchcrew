@@ -11,7 +11,7 @@ class Restaurants {
   private dbPath: string;
   constructor () {
     this.list = [];
-    this.dbPath = process.env.dbPath || 'restaurants.json';
+    this.dbPath = process.env.DB_PATH || 'restaurants.json';
     debug('Init Restaurant: %j', this.list);
     this.Load().catch(err => debug(`can't find saved restaurants`, err));
   }
