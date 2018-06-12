@@ -4,9 +4,11 @@ services:
     image: zack/lunchcrew
     build: .
     volumes:
+    - ./data:/db
     ports:
     - 3000
     environment:
     - CHANNEL_ACCESS_TOKEN=
     - CHANNEL_SECRET=
     - DEBUG=lunchcrew*
+    - DB_PATH=/db

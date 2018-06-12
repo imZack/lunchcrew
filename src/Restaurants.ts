@@ -8,8 +8,10 @@ const debug = Debug('lunchcrew:Restaurants');
 class Restaurants {
 
   private list: Array<Restaurant>;
+  private dbPath: string;
   constructor () {
     this.list = [];
+    this.dbPath = process.env.dbPath || 'restaurants.json';
     debug('Init Restaurant: %j', this.list);
     this.Load().catch(err => debug(`can't find saved restaurants`, err));
   }
@@ -56,7 +58,7 @@ class Restaurants {
   public Save = (): Promise<any> => {
     debug('Save Restaurants');
     return new Promise((resolve, reject) => {
-      writeFile('restaurants.json', JSON.stringify(this.list), function(err) {
+      writeFile(this.dbPath, JSON.stringify(this.list), function(err) {
         if (err) {
             return reject(err);
         }
@@ -71,7 +73,7 @@ class Restaurants {
   public Load = (): Promise<any> => {
     debug('Load Restaurants');
     return new Promise((resolve, reject) => {
-      readFile('restaurants.json', (err, data) => {
+      readFile(this.dbPath, (err, data) => {
         if (err) {
             return reject(err);
         }
