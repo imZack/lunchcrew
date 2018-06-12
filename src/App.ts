@@ -65,6 +65,7 @@ class App {
       action = input.substr(0, split_pos);
       parameters = input.substr(split_pos);
     }
+    action = action.toLowerCase();
 
     debug('raw input', input);
     debug('action', action);

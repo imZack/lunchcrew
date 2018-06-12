@@ -3,6 +3,7 @@ services:
   bot:
     image: zack/lunchcrew
     build: .
+    restart: always
     volumes:
     - ./data:/db
     ports:
