@@ -5,11 +5,15 @@ import * as emoji from 'node-emoji';
 import Restaurants from './Restaurants';
 const debug = Debug('lunchcrew:App');
 
+interface LineConfig {
+  channelAccessToken: string;
+  channelSecret: string;
+}
 
 class App {
-  public express;
+  public express: express.Express;
   private client: line.Client;
-  private config;
+  private config: LineConfig;
   private restaurants: Restaurants;
 
   constructor () {
@@ -53,12 +57,12 @@ class App {
       return Promise.resolve(null);
     }
 
-    let replyMessage;
+    let replyMessage: string;
     // Split Command = [Action], [Options]
     const input = event.message.text;
     const split_pos = input.indexOf(' ');
-    let action;
-    let parameters;
+    let action: string;
+    let parameters: string;
     if (split_pos === -1) {
       action = input.trim();
     } else {
@@ -95,7 +99,7 @@ eat,where,go,lunch`;
       case 'delete':
       case 'del':
       case 'd':
-        this.restaurants.RemoveRestaurant(parameters);
+        this.restaurants.RemoveRestaurant(+parameters);
         replyMessage = 'Deleted.';
         break;
 
